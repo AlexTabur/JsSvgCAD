@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bruh</title>
+</head>
+<body>
+	<style type="text/css">
+		body{
+			background-color: #000000;
+			color:#ffffff;
+		}
+		.grid{
+			stroke:#999999;
+			stroke-width:2;
+		}
+		.preview{
+			stroke:#eeeeee;
+			stroke-width:2;
+			fill:transparent;
+		}
+		.reality{
+			stroke:#00ff00;
+			stroke-width:2;
+			fill:transparent;
+		}
+	</style>
+	
+	<div id="field" style="border: 4px solid #aaa;">
+		<svg width="800" height="800" id="gridX" style="position: absolute;" class="grid"/>
+		<svg width="800" height="800" id="gridY" style="position: absolute;" class="grid"/>
+		<svg width="800" height="800" id="reality" style="position: absolute;stroke-linecap:butt;stroke-linejoin:miter;" class="reality"/>
+		<svg width="800" height="800" id="preview" style="position: absolute;stroke-linecap:butt;stroke-linejoin:miter;" class="preview"/>
+		<svg width="800" height="800" id="points_preview" style="position: absolute;" class="preview"/>
+	</div>
+	<div style="max-width: 34px; position: absolute; top: 40px; left: 10px" >
+		<div>grid
+			<input type="checkbox" id="griddisplay" checked onclick="if(griddisplay.checked){gridX.style.display='';gridY.style.display=''}else{gridX.style.display='none';gridY.style.display='none'}">
+			<input type="checkbox" id="gridsnap" checked onclick="settings.gridSnap=gridsnap.checked">
+			<input id="stepXinput" type="text" name="" value="50" oninput="settings.gridXStep=Number(stepXinput.value);settings.gridXStep?drawGridX():console.log('yay')">
+			<input id="stepYinput" type="text" name="" value="50" oninput="settings.gridYStep=Number(stepYinput.value);settings.gridYStep?drawGridY():console.log('yay')">
+			<button onclick="downloadSVG()">save</button>
+		</div>
+		<button onclick="settings.mode='line'" style="border: 4px solid #aaa;">
+			<svg width="25" height="25" style="stroke:#000;stroke-width:2">
+				<line x1="4" y1="12" x2="21" y2="12"/>
+			</svg>
+		</button>
+		<button onclick="settings.mode='circle'" style="border: 4px solid #aaa;">
+			<svg width="25" height="25" style="stroke:#000;stroke-width:2;fill: transparent;">
+				<circle cx="12" cy="12" r="10"/>
+				<circle cx="12" cy="12" r="1"/>
+				<circle cx="12" cy="2" r="1"/>
+			</svg>
+		</button>
+		<button onclick="settings.mode='circle3'" style="border: 4px solid #aaa;">
+			<svg width="25" height="25" style="stroke:#000;stroke-width:2;fill: transparent;">
+				<circle cx="12" cy="12" r="10"/>
+				<circle cx="12" cy="2" r="1"/>
+				<circle cx="4.5" cy="18" r="1"/>
+				<circle cx="19.5" cy="18" r="1"/>
+			</svg>
+		</button>
+		<button onclick="settings.mode='bcurve'" style="border: 4px solid #aaa;">
+			<svg width="25" height="25" style="stroke:#000;stroke-width:2;fill: transparent;">
+				  <path d="M 12 2 Q 16 5 5 10 0 15 18 20 "/>
+			</svg>
+		</button>
+		<button onclick="settings.mode='ccurve'" style="border: 4px solid #aaa;">
+			<svg width="25" height="25" style="stroke:#000;stroke-width:2;fill: transparent;">
+				  <path d="M 12 2 С 16 5 5 10 0 15 18 20 10 5"/>
+			</svg>
+		</button>
+	</div>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
